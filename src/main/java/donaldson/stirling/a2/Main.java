@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-public class App extends Application{
+public class Main extends Application{
   
   @Override
   public void start(Stage primaryStage) {
@@ -18,10 +18,11 @@ public class App extends Application{
   }
 
 public static void main(String[] args)  {
+    DatabaseConnection.DBConnection();
+
     System.out.println("Running App...");
     Application.launch(args);
 
-    Database.DBConnection();
     
   }
 

@@ -6,13 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class Database {
+public class DatabaseConnection {
   public static void DBConnection() {
 
     try (
-        Connection connection = DriverManager.getConnection("jdbc:sqlite:sample.db");
+        Connection connection = DriverManager.getConnection("jdbc:sqlite:MyHealth.db");
         Statement statement = connection.createStatement();) {
-      statement.setQueryTimeout(30); 
+      statement.setQueryTimeout(30);
 
       statement.executeUpdate("drop table if exists person");
       statement.executeUpdate("create table person (id integer, name string)");
@@ -20,11 +20,13 @@ public class Database {
       statement.executeUpdate("insert into person values(2, 'yui')");
       ResultSet rs = statement.executeQuery("select * from person");
       while (rs.next()) {
+
         // read the result set
         System.out.println("name = " + rs.getString("name"));
         System.out.println("id = " + rs.getInt("id"));
       }
     } catch (SQLException e) {
+
       // if the error message is "out of memory",
       // it probably means no database file is found
       e.printStackTrace(System.err);

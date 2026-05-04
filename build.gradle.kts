@@ -25,12 +25,12 @@ java {
 repositories { mavenCentral() }
 
 application {
-	mainClass.set("donaldson.stirling.a2.App")
+	mainClass.set("donaldson.stirling.a2.Main")
 }
 
 tasks.jar {
 	manifest {
-		attributes["Main-Class"] = "donaldson.stirling.a2.App"
+		attributes["Main-Class"] = "donaldson.stirling.a2.Main"
 	}
 }
 
