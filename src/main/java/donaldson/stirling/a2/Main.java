@@ -22,9 +22,7 @@ public class Main extends Application {
   public void start(Stage primaryStage) {
     SceneManager sceneManager = new SceneManager(primaryStage);
 
-
     LoginView loginView = new LoginView();
-    //Scene scene = new Scene(loginView.getRoot(), 380, 450);
 
     sceneManager.show(loginView.getRoot());
   }
