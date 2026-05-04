@@ -14,8 +14,6 @@ public class Main extends Application {
 
   @Override
   public void start(Stage primaryStage) {
- 
-    AppContext appContext = new AppContext();
 
     // sceneManager
 
@@ -26,11 +24,16 @@ public class Main extends Application {
     primaryStage.setScene(scene);
     primaryStage.show();
 
-    //sceneManager.show (loginview)
+    // sceneManager.show (loginview)
   }
 
   public static void main(String[] args) {
-    Application.launch(args);
+    try {
+      AppContext appContext = new AppContext();
+      Application.launch(args);
+    } catch (Exception e) {
+      e.printStackTrace(System.err);
+    }
   }
 
 }

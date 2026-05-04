@@ -31,4 +31,8 @@ public final class Schema {
           );
       """;
 
+  public static final String[] CREATE_TABLES = {
+      CREATE_USERS_TABLE,
+      CREATE_RECORDS_TABLE
+  };
 }
