@@ -5,7 +5,6 @@
  * Learn more about Gradle by exploring our Samples at https://docs.gradle.org/9.5.0/samples
  */
 
-
 plugins {
   id("java")
   id("application")
@@ -26,12 +25,12 @@ java {
 repositories { mavenCentral() }
 
 application {
-	mainClass.set("donaldson.stirling.App")
+	mainClass.set("donaldson.stirling.a2.App")
 }
 
 tasks.jar {
 	manifest {
-		attributes["Main-Class"] = "donaldson.stirling.App"
+		attributes["Main-Class"] = "donaldson.stirling.a2.App"
 	}
 }
 
