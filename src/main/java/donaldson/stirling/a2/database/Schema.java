@@ -12,13 +12,14 @@ public final class Schema {
               username TEXT NOT NULL UNIQUE,
               first_name TEXT NOT NULL,
               last_name TEXT NOT NULL,
-              email TEXT NOT NULL UNIQUE,
+              email TEXT NOT NULL UNIQUE
           );
       """;
 
   private static final String CREATE_RECORDS_TABLE = """
           CREATE TABLE IF NOT EXISTS records (
               id INTEGER PRIMARY KEY AUTOINCREMENT,
+              user_id INTEGER NOT NULL,
               weight REAL,
               temperature REAL,
               blood_pressure TEXT,

@@ -7,7 +7,6 @@ import donaldson.stirling.a2.database.DatabaseInitialiser;
 
 public class AppContext {
 
-
   private final Connection connection;
 
   public AppContext() throws Exception {
