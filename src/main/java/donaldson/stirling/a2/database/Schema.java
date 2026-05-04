@@ -3,7 +3,7 @@ package donaldson.stirling.a2.database;
 public final class Schema {
 
   private Schema() {
-    // shouldn't be able to make schema objects
+    // shouldn't be able instantiate schema objects
   }
 
   private static final String CREATE_USERS_TABLE = """

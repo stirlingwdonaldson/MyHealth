@@ -11,7 +11,8 @@ public final class DatabaseConnection {
     // shouldn't be instantiated
   }
 
-  public static Connection getConnection() throws SQLException {
+  public static Connection openConnection() throws SQLException {
     return DriverManager.getConnection(DB_URL);
   }
+
 }
