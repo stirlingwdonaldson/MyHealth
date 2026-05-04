@@ -25,12 +25,12 @@ java {
 repositories { mavenCentral() }
 
 application {
-	mainClass.set("donaldson.stirling.a2.App")
+	mainClass.set("donaldson.stirling.a2.Main")
 }
 
 tasks.jar {
 	manifest {
-		attributes["Main-Class"] = "donaldson.stirling.a2.App"
+		attributes["Main-Class"] = "donaldson.stirling.a2.Main"
 	}
 }
 
@@ -38,6 +38,7 @@ dependencies {
 	testImplementation(platform("org.junit:junit-bom:6.0.3"))
 	testImplementation("org.junit.jupiter:junit-jupiter")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+  implementation("org.xerial:sqlite-jdbc:3.46.1.3")
 }
 
 tasks.test {
