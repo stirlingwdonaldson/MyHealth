@@ -1,5 +1,7 @@
 package donaldson.stirling.a2;
 
+import donaldson.stirling.a2.database.*;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -18,6 +20,8 @@ public class App extends Application{
 public static void main(String[] args)  {
     System.out.println("Running App...");
     Application.launch(args);
+
+    Database.DBConnection();
     
   }
 
