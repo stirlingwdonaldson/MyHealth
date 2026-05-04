@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DatabaseConnection {
-  public static void DBConnection() {
+  public static void getConnection() {
 
     try (
         Connection connection = DriverManager.getConnection("jdbc:sqlite:MyHealth.db");

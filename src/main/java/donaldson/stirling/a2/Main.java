@@ -18,7 +18,7 @@ public class Main extends Application{
   }
 
 public static void main(String[] args)  {
-    DatabaseConnection.DBConnection();
+    DatabaseConnection.getConnection();
 
     System.out.println("Running App...");
     Application.launch(args);
