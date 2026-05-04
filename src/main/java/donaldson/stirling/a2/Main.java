@@ -1,7 +1,8 @@
 package donaldson.stirling.a2;
 
 import donaldson.stirling.a2.app.AppContext;
-
+import donaldson.stirling.a2.app.SceneManager;
+import donaldson.stirling.a2.view.LoginView;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,33 +11,34 @@ import javafx.stage.Stage;
 public class Main extends Application {
   private AppContext appContext;
 
+  // BEFORE GUI LOADS
   @Override
   public void init() throws Exception {
     this.appContext = new AppContext();
   }
 
+  // ON GUI LOAD
   @Override
   public void start(Stage primaryStage) {
-    // sceneManager
-    // login view + args thereof
+    SceneManager sceneManager = new SceneManager(primaryStage);
 
-    Button confirm = new Button("CLICK");
-    Scene scene = new Scene(confirm, 200, 250);
-    primaryStage.setScene(scene);
-    primaryStage.show();
 
-    // sceneManager.show (loginview)
+    LoginView loginView = new LoginView();
+    //Scene scene = new Scene(loginView.getRoot(), 380, 450);
+
+    sceneManager.show(loginView.getRoot());
   }
 
+  // ON GUI CLOSE
   @Override
   public void stop() throws Exception {
-    if (this.appContext != null){
+    if (this.appContext != null) {
       appContext.close();
     }
   }
 
   public static void main(String[] args) {
-      Application.launch(args);
+    Application.launch(args);
   }
 
 }
