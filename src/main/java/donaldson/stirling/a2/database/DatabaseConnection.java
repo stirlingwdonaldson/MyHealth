@@ -2,34 +2,25 @@ package donaldson.stirling.a2.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class DatabaseConnection {
-  public static void getConnection() {
+  private final String DB_URL = "jdbc:sqlite:MyHealth.db";
+  private Connection connection;
 
-    try (
-        Connection connection = DriverManager.getConnection("jdbc:sqlite:MyHealth.db");
-        Statement statement = connection.createStatement();) {
-      statement.setQueryTimeout(30);
 
-      statement.executeUpdate("drop table if exists person");
-      statement.executeUpdate("create table person (id integer, name string)");
-      statement.executeUpdate("insert into person values(1, 'leo')");
-      statement.executeUpdate("insert into person values(2, 'yui')");
-      ResultSet rs = statement.executeQuery("select * from person");
-      while (rs.next()) {
+  // @TODO should getConnection jjust return driverManager.getConnection(DB_URL), is constructor necessary?
 
-        // read the result set
-        System.out.println("name = " + rs.getString("name"));
-        System.out.println("id = " + rs.getInt("id"));
-      }
-    } catch (SQLException e) {
-
-      // if the error message is "out of memory",
-      // it probably means no database file is found
+  public DatabaseConnection() {
+    try {
+      this.connection = DriverManager.getConnection(DB_URL);
+      System.out.println("connected to database: " + DB_URL); // @TODO update
+    } catch (SQLException e){
       e.printStackTrace(System.err);
     }
+  }
+
+  public Connection getConnection() {
+    return this.connection;
   }
 }
