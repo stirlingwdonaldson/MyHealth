@@ -6,13 +6,13 @@ public final class Schema {
     // shouldn't be able instantiate schema objects
   }
 
+  // @TODO add role (enum, user || admin).
   private static final String CREATE_USERS_TABLE = """
       CREATE TABLE IF NOT EXISTS users (
               id INTEGER PRIMARY KEY AUTOINCREMENT,
               username TEXT NOT NULL UNIQUE,
               first_name TEXT NOT NULL,
-              last_name TEXT NOT NULL,
-              email TEXT NOT NULL UNIQUE
+              last_name TEXT NOT NULL
           );
       """;
 
