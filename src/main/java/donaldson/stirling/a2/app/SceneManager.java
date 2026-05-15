@@ -22,7 +22,7 @@ public class SceneManager {
 
 }
 
-  // will manage visible scenes.]
+  // will manage visible scenes.
   // manage as a stack? if stack >1 (exc. login), add tab component?
   // if !isAuthenticated, login screen permanently top of stack (+ make stack
   // immutable)?

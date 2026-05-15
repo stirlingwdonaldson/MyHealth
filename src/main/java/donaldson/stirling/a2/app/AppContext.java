@@ -11,19 +11,17 @@ public class AppContext implements AutoCloseable {
   private final Connection connection;
 
   public AppContext() throws Exception {
-    System.out.println("app context...");
-
     this.connection = DatabaseConnection.openConnection();
     DatabaseInitialiser.initialise(connection);
   }
 
-  public Connection getConnection(){
+  public Connection getConnection() {
     return this.connection;
   }
 
   @Override
   public void close() throws SQLException {
-    if(!connection.isClosed()){
+    if (!connection.isClosed()) {
       connection.close();
     }
   }
