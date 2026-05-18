@@ -2,6 +2,7 @@ package donaldson.stirling.a2;
 
 import donaldson.stirling.a2.app.AppContext;
 import donaldson.stirling.a2.app.SceneManager;
+import donaldson.stirling.a2.controller.LoginController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

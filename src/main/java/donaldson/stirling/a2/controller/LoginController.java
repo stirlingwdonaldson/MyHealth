@@ -6,8 +6,6 @@ import java.net.URL;
 import donaldson.stirling.a2.app.AppContext;
 import donaldson.stirling.a2.app.SceneManager;
 
-import donaldson.stirling.a2.app.AppContext;
-import donaldson.stirling.a2.app.SceneManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -59,13 +57,13 @@ public class LoginController {
   }
 
   @FXML
-  private void handleShowSignup(){
+  private void handleShowSignup() {
     new SignupController(appContext, sceneManager).show();
   }
 
   private Parent loadView() {
     try {
-      URL resource = getClass().getResource("/donaldson/stirling/a2/view/login-view.fxml");
+      URL resource = getClass().getResource("/login-view.fxml");
       FXMLLoader loader = new FXMLLoader(resource);
       loader.setController(this);
       return loader.load();

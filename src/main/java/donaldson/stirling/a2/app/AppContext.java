@@ -21,12 +21,12 @@ public class AppContext implements AutoCloseable {
     return this.connection;
   }
 
-  public User getCurrentUser(){
+  public User getCurrentUser() {
     return this.currentUser;
   }
 
   // could move elsewhere, possibly insecure
-  public void setCurrentUser(User currentUser){
+  public void setCurrentUser(User currentUser) {
     this.currentUser = currentUser;
   }
 
