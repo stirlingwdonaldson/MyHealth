@@ -30,20 +30,20 @@ public class User {
   // GETTERS
 
   public String getUsername() {
-    return "USERNAME";
+    return this.username;
   }
 
   public String getFirstName() {
-    return "firstname";
+    return this.firstName;
   }
 
   public String getLastName() {
-    return "lastname";
+    return this.lastName;
 
   }
 
   public String getFullName() {
-    return "fullname";
+    return this.firstName + " " + this.lastName;
 
   }
 
