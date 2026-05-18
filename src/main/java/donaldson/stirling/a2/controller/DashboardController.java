@@ -5,6 +5,7 @@ import java.net.URL;
 
 import donaldson.stirling.a2.app.AppContext;
 import donaldson.stirling.a2.app.SceneManager;
+import donaldson.stirling.a2.model.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -39,7 +40,11 @@ public class DashboardController {
 
   @FXML
   private void initialize() {
-
+    User user  = appContext.getCurrentUser();
+    
+    welcomeLabel.setText("Welcome, " + user.getUsername() + "!!");
+    fullNameLabel.setText(user.getFullName());
+    usernameLabel.setText(user.getUsername());
   }
 
   @FXML
