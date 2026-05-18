@@ -48,4 +48,23 @@ public class LoginController {
     }
   }
 
+  @FXML
+  private void handleLogin(){
+    hideError();
+  }
+
+
+
+  private void showError(String message){
+    errorLabel.setText(message);
+    errorLabel.setVisible(true);
+    errorLabel.setManaged(true);
+  }
+
+  private void hideError(){
+    errorLabel.setText("");
+    errorLabel.setVisible(false);
+    errorLabel.setManaged(false);
+  }
+
 }
