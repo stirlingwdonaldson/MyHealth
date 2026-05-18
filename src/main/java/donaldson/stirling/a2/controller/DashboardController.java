@@ -49,7 +49,8 @@ public class DashboardController {
 
   @FXML
   private void handleLogout() {
-
+    appContext.setCurrentUser(null);
+    new LoginController(appContext, sceneManager).show();
   }
 
   private Parent loadView() {
