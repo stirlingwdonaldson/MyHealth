@@ -11,6 +11,7 @@ public final class Schema {
       CREATE TABLE IF NOT EXISTS users (
               id INTEGER PRIMARY KEY AUTOINCREMENT,
               username TEXT NOT NULL UNIQUE,
+              hashed_password TEXT NOT NULL,
               first_name TEXT NOT NULL,
               last_name TEXT NOT NULL
           );
