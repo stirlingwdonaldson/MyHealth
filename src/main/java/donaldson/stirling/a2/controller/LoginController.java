@@ -2,10 +2,12 @@ package donaldson.stirling.a2.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 
 import donaldson.stirling.a2.app.AppContext;
 import donaldson.stirling.a2.app.SceneManager;
-
+import donaldson.stirling.a2.model.User;
+import donaldson.stirling.a2.repository.UserRepository;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -52,8 +54,21 @@ public class LoginController {
       return;
     }
 
-    showError("login functionality incomplete.");
+    UserRepository userRepository = new UserRepository(appContext.getConnection());
 
+    try {
+      User user = userRepository.authenticate(username, password);
+
+      if(user == null){
+        showError("Incorrect username or password");
+        return;
+      }
+
+      appContext.setCurrentUser(user);
+      new DashboardController(appContext, sceneManager).show();
+    } catch (SQLException exception){
+      showError("Unable to login. Please try again.");
+    }
   }
 
   @FXML
