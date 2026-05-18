@@ -2,8 +2,12 @@ package donaldson.stirling.a2.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+
 import donaldson.stirling.a2.app.AppContext;
 import donaldson.stirling.a2.app.SceneManager;
+import donaldson.stirling.a2.model.User;
+import donaldson.stirling.a2.repository.UserRepository;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -65,7 +69,26 @@ public class SignupController {
       return;
     }
 
-    showError("sign up logic incomplete");
+
+    UserRepository userRepository = new UserRepository(appContext.getConnection());
+
+    try {
+
+      if(userRepository.usernameExists(username)) {
+        showError("That username is already taken.");
+        return;
+      }
+
+      User user = userRepository.createUser(username, password, firstName, lastName);
+      appContext.setCurrentUser(user);
+      new DashboardController(appContext, sceneManager).show();
+
+    } catch (SQLException exception){
+      showError("Unable to create account. Please try again.");
+    }
+    // @TODO add additional handling of inputs
+
+
 
   }
 

@@ -59,6 +59,8 @@ public class LoginController {
     try {
       User user = userRepository.authenticate(username, password);
 
+      // @TODO add find by username, if returns null then no user with that username exists.
+
       if(user == null){
         showError("Incorrect username or password");
         return;
