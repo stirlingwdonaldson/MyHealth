@@ -34,4 +34,23 @@ public class SignupController {
     this.appContext = appContext;
     this.sceneManager = sceneManager;
   }
+
+  public void show(){
+    sceneManager.show("MyHealth | Sign Up", loadView());
+  }
+
+
+
+
+  private Parent loadView() {
+    try {
+      URL resource = getClass().getResource("/donaldson/stirling/a2/view/signup-view.fxml");
+      FXMLLoader loader = new FXMLLoader(resource);
+      loader.setController(this);
+      return loader.load();
+    } catch ( IOException exception){
+      throw new IllegalStateException("Failed to load signup-view.fxml", exception);
+    }
+  }
+
 }
