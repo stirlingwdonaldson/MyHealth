@@ -37,6 +37,28 @@ public class LoginController {
     sceneManager.show("MyHealth | Login", loadView());
   }
 
+  @FXML
+  private void handleLogin() {
+    hideError();
+
+    String username = usernameField.getText() == null ? "" : usernameField.getText().trim();
+    String password = passwordField.getText() == null ? "" : passwordField.getText().trim();
+
+    if(username.isEmpty()){
+      showError("Please enter your username.");
+      return;
+    }
+
+
+    if(password.isEmpty()){
+      showError("Please enter your password.");
+      return;
+    }
+
+    showError("login functionality incomplete.");
+
+  }
+
   private Parent loadView() {
     try {
       URL resource = getClass().getResource("/donaldson/stirling/a2/view/login-view.fxml");
@@ -48,20 +70,13 @@ public class LoginController {
     }
   }
 
-  @FXML
-  private void handleLogin(){
-    hideError();
-  }
-
-
-
-  private void showError(String message){
+  private void showError(String message) {
     errorLabel.setText(message);
     errorLabel.setVisible(true);
     errorLabel.setManaged(true);
   }
 
-  private void hideError(){
+  private void hideError() {
     errorLabel.setText("");
     errorLabel.setVisible(false);
     errorLabel.setManaged(false);
