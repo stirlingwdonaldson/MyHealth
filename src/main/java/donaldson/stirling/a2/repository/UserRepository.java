@@ -33,9 +33,11 @@ public class UserRepository {
 
     String sql = "INSERT INTO users (username, hashed_password, first_name, last_name) VALUES (?, ?, ?, ?)";
 
+    String hashedPassword = PasswordUtil.hash(rawPassword);
+
     try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
       statement.setString(1, username);
-      statement.setString(2, PasswordUtil.hash(rawPassword));
+      statement.setString(2, hashedPassword);
       statement.setString(3, firstName);
       statement.setString(4, lastName);
       statement.executeUpdate();
@@ -43,7 +45,7 @@ public class UserRepository {
       try (ResultSet keys = statement.getGeneratedKeys()) {
         if (keys.next()) {
           int id = keys.getInt(1);
-          return new User(id, username, PasswordUtil.hash(rawPassword), firstName, lastName); // hashes twice
+          return new User(id, username, hashedPassword, firstName, lastName);
         }
       }
     }
@@ -70,13 +72,13 @@ public class UserRepository {
   public User authenticate(String username, String rawPassword) throws SQLException {
     User user = findByUsername(username);
 
-    if(user == null){
+    if (user == null) {
       return null;
     }
 
     String hashedInput = PasswordUtil.hash(rawPassword);
 
-    if(!hashedInput.equals(user.getHashedPassword())){
+    if (!hashedInput.equals(user.getHashedPassword())) {
       return null;
     }
 
