@@ -68,6 +68,19 @@ public class UserRepository {
   }
 
   public User authenticate(String username, String rawPassword) throws SQLException {
+    User user = findByUsername(username);
+
+    if(user == null){
+      return null;
+    }
+
+    String hashedInput = PasswordUtil.hash(rawPassword);
+
+    if(!hashedInput.equals(user.getHashedPassword())){
+      return null;
+    }
+
+    return user;
   }
 
   private User mapUser(ResultSet resultSet) throws SQLException {
