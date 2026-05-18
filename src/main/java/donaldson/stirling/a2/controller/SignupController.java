@@ -39,6 +39,36 @@ public class SignupController {
     sceneManager.show("MyHealth | Sign Up", loadView());
   }
 
+  @FXML
+  private void handleSignUp() {
+    hideError();
+
+    String firstName = firstNameField.getText() == null ? "" : firstNameField.getText().trim();
+    String lastName = lastNameField.getText() == null ? "" : lastNameField.getText().trim();
+    String username = usernameField.getText() == null ? "" : usernameField.getText().trim();
+    String password = passwordField.getText() == null ? "" : passwordField.getText().trim();
+
+    if (firstName.isEmpty()) {
+      showError("Please enter your first name.");
+    }
+
+    if (lastName.isEmpty()) {
+      showError("Please enter your last name.");
+      return;
+    }
+    if (username.isEmpty()) {
+      showError("Please enter a username.");
+      return;
+    }
+    if (password.isEmpty()) {
+      showError("Please enter a password.");
+      return;
+    }
+
+    showError("sign up logic incomplete");
+
+  }
+
   private Parent loadView() {
     try {
       URL resource = getClass().getResource("/donaldson/stirling/a2/view/signup-view.fxml");
