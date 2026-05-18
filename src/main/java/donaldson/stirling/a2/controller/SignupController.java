@@ -35,12 +35,9 @@ public class SignupController {
     this.sceneManager = sceneManager;
   }
 
-  public void show(){
+  public void show() {
     sceneManager.show("MyHealth | Sign Up", loadView());
   }
-
-
-
 
   private Parent loadView() {
     try {
@@ -48,9 +45,21 @@ public class SignupController {
       FXMLLoader loader = new FXMLLoader(resource);
       loader.setController(this);
       return loader.load();
-    } catch ( IOException exception){
+    } catch (IOException exception) {
       throw new IllegalStateException("Failed to load signup-view.fxml", exception);
     }
+  }
+
+  private void showError(String message) {
+    errorLabel.setText(message);
+    errorLabel.setVisible(true);
+    errorLabel.setManaged(true);
+  }
+
+  private void hideError() {
+    errorLabel.setText("");
+    errorLabel.setVisible(false);
+    errorLabel.setManaged(false);
   }
 
 }
