@@ -3,12 +3,14 @@ package donaldson.stirling.a2.model;
 public class User {
   private final int id;
   private String username;
+  private String hashedPassword;
   private String firstName;
   private String lastName;
 
-  public User(int id, String username, String firstName, String lastName) {
+  public User(int id, String username, String hashedPassword, String firstName, String lastName) {
     this.id = id;
     this.username = username;
+    this.hashedPassword = hashedPassword;
     this.firstName = firstName;
     this.lastName = lastName;
   }
@@ -17,6 +19,10 @@ public class User {
 
   public void setUsername(String username) {
     this.username = username;
+  }
+
+  public void setPassword(String password) {
+    this.hashedPassword = password;
   }
 
   public void setFirstName(String firstName) {
@@ -31,6 +37,10 @@ public class User {
 
   public String getUsername() {
     return this.username;
+  }
+
+  public String getHashedPassword() {
+    return this.hashedPassword;
   }
 
   public String getFirstName() {
