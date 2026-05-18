@@ -22,7 +22,7 @@ public class UserRepository {
     try (PreparedStatement statement = connection.prepareStatement(sql)) {
       statement.setString(1, username);
 
-      try(ResultSet resultSet = statement.executeQuery()){
+      try (ResultSet resultSet = statement.executeQuery()) {
         return resultSet.next();
       }
     }
@@ -31,30 +31,51 @@ public class UserRepository {
   public User createUser(String username, String rawPassword, String firstName, String lastName)
       throws SQLException {
 
-      String sql = "INSERT INTO users (username, hashed_password, first_name, last_name) VALUES (?, ?, ?, ?)";
+    String sql = "INSERT INTO users (username, hashed_password, first_name, last_name) VALUES (?, ?, ?, ?)";
 
-      try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-        statement.setString(1, username);
-        statement.setString(2, PasswordUtil.hash(rawPassword));
-        statement.setString(3, firstName);
-        statement.setString(4, lastName);
-        statement.executeUpdate();
+    try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+      statement.setString(1, username);
+      statement.setString(2, PasswordUtil.hash(rawPassword));
+      statement.setString(3, firstName);
+      statement.setString(4, lastName);
+      statement.executeUpdate();
 
-        try(ResultSet keys = statement.getGeneratedKeys()) {
-          if(keys.next()){
-            int id = keys.getInt(1);
-            return new User(id, username, PasswordUtil.hash(rawPassword), firstName, lastName); // hashes twice
-          }
+      try (ResultSet keys = statement.getGeneratedKeys()) {
+        if (keys.next()) {
+          int id = keys.getInt(1);
+          return new User(id, username, PasswordUtil.hash(rawPassword), firstName, lastName); // hashes twice
         }
       }
+    }
 
-      throw new SQLException("Failed to create user.");
+    throw new SQLException("Failed to create user.");
   }
 
   public User findByUsername(String username) throws SQLException {
+    String sql = "SELECT id, username, hashed_password, first_name, last_name FROM users WHERE username = ?";
+
+    try (PreparedStatement statement = connection.prepareStatement(sql)) {
+      statement.setString(1, username);
+
+      try (ResultSet resultSet = statement.executeQuery()) {
+        if (!resultSet.next()) {
+          return null;
+        }
+
+        return mapUser(resultSet);
+      }
+    }
   }
 
   public User authenticate(String username, String rawPassword) throws SQLException {
   }
 
+  private User mapUser(ResultSet resultSet) throws SQLException {
+    return new User(
+        resultSet.getInt("id"),
+        resultSet.getString("username"),
+        resultSet.getString("hashed_password"),
+        resultSet.getString("first_name"),
+        resultSet.getString("last_name"));
+  }
 }
