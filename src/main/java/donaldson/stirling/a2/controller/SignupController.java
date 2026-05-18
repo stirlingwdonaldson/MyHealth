@@ -69,6 +69,11 @@ public class SignupController {
 
   }
 
+  @FXML
+  private void handleBackToLogin(){
+    new LoginController(appContext, sceneManager).show();
+  }
+
   private Parent loadView() {
     try {
       URL resource = getClass().getResource("/donaldson/stirling/a2/view/signup-view.fxml");
