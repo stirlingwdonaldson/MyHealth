@@ -44,19 +44,23 @@ public class LoginController {
     String username = usernameField.getText() == null ? "" : usernameField.getText().trim();
     String password = passwordField.getText() == null ? "" : passwordField.getText().trim();
 
-    if(username.isEmpty()){
+    if (username.isEmpty()) {
       showError("Please enter your username.");
       return;
     }
 
-
-    if(password.isEmpty()){
+    if (password.isEmpty()) {
       showError("Please enter your password.");
       return;
     }
 
     showError("login functionality incomplete.");
 
+  }
+
+  @FXML
+  private void handleShowSignup(){
+    new SignupController(appContext, sceneManager).show();
   }
 
   private Parent loadView() {
