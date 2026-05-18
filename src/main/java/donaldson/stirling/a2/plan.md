@@ -8,5 +8,7 @@ After logging in, the dashboard opens and the user can see a welcome message con
 
 bg color: 
 #f4f7fb
+border color:
+#d9e2ec
 
 
