@@ -14,5 +14,4 @@ public final class DatabaseConnection {
   public static Connection openConnection() throws SQLException {
     return DriverManager.getConnection(DB_URL);
   }
-
 }

@@ -1,13 +1,12 @@
 package donaldson.stirling.a2.repository;
 
+import donaldson.stirling.a2.model.User;
+import donaldson.stirling.a2.util.PasswordUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
-import donaldson.stirling.a2.model.User;
-import donaldson.stirling.a2.util.PasswordUtil;
 
 public class UserRepository {
   private final Connection connection;
@@ -31,11 +30,13 @@ public class UserRepository {
   public User createUser(String username, String rawPassword, String firstName, String lastName)
       throws SQLException {
 
-    String sql = "INSERT INTO users (username, hashed_password, first_name, last_name) VALUES (?, ?, ?, ?)";
+    String sql =
+        "INSERT INTO users (username, hashed_password, first_name, last_name) VALUES (?, ?, ?, ?)";
 
     String hashedPassword = PasswordUtil.hash(rawPassword);
 
-    try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+    try (PreparedStatement statement =
+        connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
       statement.setString(1, username);
       statement.setString(2, hashedPassword);
       statement.setString(3, firstName);
@@ -54,7 +55,8 @@ public class UserRepository {
   }
 
   public User findByUsername(String username) throws SQLException {
-    String sql = "SELECT id, username, hashed_password, first_name, last_name FROM users WHERE username = ?";
+    String sql =
+        "SELECT id, username, hashed_password, first_name, last_name FROM users WHERE username = ?";
 
     try (PreparedStatement statement = connection.prepareStatement(sql)) {
       statement.setString(1, username);

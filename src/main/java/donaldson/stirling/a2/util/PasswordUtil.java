@@ -6,9 +6,7 @@ import java.security.NoSuchAlgorithmException;
 
 public final class PasswordUtil {
 
-  private PasswordUtil() {
-
-  }
+  private PasswordUtil() {}
 
   public static boolean isValidPassword(String password) {
     if (password == null || password.length() < 8) {
@@ -19,7 +17,6 @@ public final class PasswordUtil {
     boolean hasNumber = false;
     boolean hasUppercase = false;
     boolean hasSpecial = false;
-  
 
     // for each letter, check if it satisfies conditions.
     for (int i = 0; i < password.length(); i++) {
@@ -41,7 +38,7 @@ public final class PasswordUtil {
         hasSpecial = true;
       }
     }
-    
+
     // propositional logic  (AND) on return statement
     // if one is false, the whole return statement is
     return hasLetter && hasNumber && hasUppercase && hasSpecial;
@@ -49,18 +46,17 @@ public final class PasswordUtil {
 
   public static String hash(String password) {
 
-    try{
+    try {
       MessageDigest digest = MessageDigest.getInstance("SHA-256");
       byte[] hashBytes = digest.digest(password.getBytes(StandardCharsets.UTF_8));
 
       StringBuilder builder = new StringBuilder();
-      for(byte hashByte : hashBytes){
+      for (byte hashByte : hashBytes) {
         builder.append(String.format("%02x", hashByte));
       }
       return builder.toString();
-    } catch (NoSuchAlgorithmException exception){
+    } catch (NoSuchAlgorithmException exception) {
       throw new IllegalStateException("SHA-256 not available", exception);
     }
   }
-
 }

@@ -22,7 +22,7 @@ public class SceneManager {
   }
 
   // can remove, for future-proofing.
-  public void show(Parent root){
+  public void show(Parent root) {
     show("MyHealth", root);
   }
 }

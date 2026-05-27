@@ -35,6 +35,10 @@ public class User {
 
   // GETTERS
 
+  public int getId() {
+    return this.id;
+  }
+
   public String getUsername() {
     return this.username;
   }
@@ -49,12 +53,9 @@ public class User {
 
   public String getLastName() {
     return this.lastName;
-
   }
 
   public String getFullName() {
     return this.firstName + " " + this.lastName;
-
   }
-
 }

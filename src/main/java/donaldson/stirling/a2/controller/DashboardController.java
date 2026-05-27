@@ -1,29 +1,24 @@
 package donaldson.stirling.a2.controller;
 
-import java.io.IOException;
-import java.net.URL;
-
 import donaldson.stirling.a2.app.AppContext;
 import donaldson.stirling.a2.app.SceneManager;
 import donaldson.stirling.a2.model.User;
+import java.io.IOException;
+import java.net.URL;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 
 public class DashboardController {
   private final AppContext appContext;
   private final SceneManager sceneManager;
 
-  @FXML
-  private Label welcomeLabel;
+  @FXML private Label welcomeLabel;
 
-  @FXML
-  private Label fullNameLabel;
+  @FXML private Label fullNameLabel;
 
-  @FXML
-  private Label usernameLabel;
+  @FXML private Label usernameLabel;
 
   public DashboardController(AppContext appContext, SceneManager sceneManager) {
     this.appContext = appContext;
@@ -40,9 +35,9 @@ public class DashboardController {
 
   @FXML
   private void initialize() {
-    User user  = appContext.getCurrentUser();
-    
-    welcomeLabel.setText("Welcome, " + user.getUsername() + "!!");
+    User user = appContext.getCurrentUser();
+
+    welcomeLabel.setText("Welcome, " + user.getFullName());
     fullNameLabel.setText(user.getFullName());
     usernameLabel.setText(user.getUsername());
   }
@@ -63,5 +58,4 @@ public class DashboardController {
       throw new IllegalStateException("Failed to load dashboard-view.fxml", exception);
     }
   }
-
 }

@@ -1,13 +1,12 @@
 package donaldson.stirling.a2.controller;
 
-import java.io.IOException;
-import java.net.URL;
-import java.sql.SQLException;
-
 import donaldson.stirling.a2.app.AppContext;
 import donaldson.stirling.a2.app.SceneManager;
 import donaldson.stirling.a2.model.User;
 import donaldson.stirling.a2.repository.UserRepository;
+import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,14 +18,11 @@ public class LoginController {
   private final AppContext appContext;
   private final SceneManager sceneManager;
 
-  @FXML
-  private TextField usernameField;
+  @FXML private TextField usernameField;
 
-  @FXML
-  private PasswordField passwordField;
+  @FXML private PasswordField passwordField;
 
-  @FXML
-  private Label errorLabel;
+  @FXML private Label errorLabel;
 
   public LoginController(AppContext appContext, SceneManager sceneManager) {
     this.appContext = appContext;
@@ -61,14 +57,14 @@ public class LoginController {
 
       // @TODO add find by username, if returns null then no user with that username exists.
 
-      if(user == null){
+      if (user == null) {
         showError("Incorrect username or password");
         return;
       }
 
       appContext.setCurrentUser(user);
       new DashboardController(appContext, sceneManager).show();
-    } catch (SQLException exception){
+    } catch (SQLException exception) {
       showError("Unable to login. Please try again.");
     }
   }
@@ -100,5 +96,4 @@ public class LoginController {
     errorLabel.setVisible(false);
     errorLabel.setManaged(false);
   }
-
 }

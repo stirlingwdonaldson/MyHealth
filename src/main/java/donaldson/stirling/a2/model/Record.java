@@ -7,7 +7,5 @@ public class Record {
   private int diastole;
   private String bloodPressure;
 
-  public Record() {
-
-  }
+  public Record() {}
 }

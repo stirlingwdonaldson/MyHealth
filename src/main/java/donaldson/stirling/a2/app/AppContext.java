@@ -1,11 +1,10 @@
 package donaldson.stirling.a2.app;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-
 import donaldson.stirling.a2.database.DatabaseConnection;
 import donaldson.stirling.a2.database.DatabaseInitialiser;
 import donaldson.stirling.a2.model.User;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 public class AppContext implements AutoCloseable {
 
