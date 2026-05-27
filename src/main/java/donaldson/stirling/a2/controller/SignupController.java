@@ -8,6 +8,7 @@ import donaldson.stirling.a2.app.AppContext;
 import donaldson.stirling.a2.app.SceneManager;
 import donaldson.stirling.a2.model.User;
 import donaldson.stirling.a2.repository.UserRepository;
+import donaldson.stirling.a2.util.PasswordUtil;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -67,6 +68,12 @@ public class SignupController {
     }
     if (password.isEmpty()) {
       showError("Please enter a password.");
+      return;
+    }
+
+    if (!PasswordUtil.isValidPassword(password)) {
+      showError(
+          "Password must be at least 8 characters and include letters, numbers, one uppercase letter, and one special character.");
       return;
     }
 
