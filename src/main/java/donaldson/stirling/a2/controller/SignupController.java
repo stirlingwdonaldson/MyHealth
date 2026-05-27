@@ -54,6 +54,7 @@ public class SignupController {
 
     if (firstName.isEmpty()) {
       showError("Please enter your first name.");
+      return;
     }
 
     if (lastName.isEmpty()) {
