@@ -2,7 +2,7 @@ package donaldson.stirling.a2;
 
 import donaldson.stirling.a2.app.AppContext;
 import donaldson.stirling.a2.app.SceneManager;
-import donaldson.stirling.a2.view.LoginView;
+import donaldson.stirling.a2.controller.LoginController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -21,10 +21,7 @@ public class Main extends Application {
   public void start(Stage primaryStage) {
     SceneManager sceneManager = new SceneManager(primaryStage);
 
-    // loads login view into sceneManager
-    LoginView loginView = new LoginView();
-
-    sceneManager.show(loginView.getRoot());
+    new LoginController(appContext, sceneManager).show();
   }
 
   // ON GUI CLOSE
@@ -38,5 +35,4 @@ public class Main extends Application {
   public static void main(String[] args) {
     Application.launch(args);
   }
-
 }

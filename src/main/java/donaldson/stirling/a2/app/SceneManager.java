@@ -14,12 +14,17 @@ public class SceneManager {
     this.stage = stage;
   }
 
-  public void show(Parent root) {
+  public void show(String title, Parent root) {
     Scene scene = new Scene(root, DEFAULT_WIDTH, DEFAULT_HEIGHT);
+    stage.setTitle(title);
     stage.setScene(scene);
     stage.show();
   }
 
+  // can remove, for future-proofing.
+  public void show(Parent root) {
+    show("MyHealth", root);
+  }
 }
 
   // will manage visible scenes.

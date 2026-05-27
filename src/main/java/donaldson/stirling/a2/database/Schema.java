@@ -7,16 +7,19 @@ public final class Schema {
   }
 
   // @TODO add role (enum, user || admin).
-  private static final String CREATE_USERS_TABLE = """
+  private static final String CREATE_USERS_TABLE =
+      """
       CREATE TABLE IF NOT EXISTS users (
               id INTEGER PRIMARY KEY AUTOINCREMENT,
               username TEXT NOT NULL UNIQUE,
+              hashed_password TEXT NOT NULL,
               first_name TEXT NOT NULL,
               last_name TEXT NOT NULL
           );
       """;
 
-  private static final String CREATE_RECORDS_TABLE = """
+  private static final String CREATE_RECORDS_TABLE =
+      """
           CREATE TABLE IF NOT EXISTS records (
               id INTEGER PRIMARY KEY AUTOINCREMENT,
               user_id INTEGER NOT NULL,
@@ -32,8 +35,5 @@ public final class Schema {
           );
       """;
 
-  public static final String[] CREATE_TABLES = {
-      CREATE_USERS_TABLE,
-      CREATE_RECORDS_TABLE
-  };
+  public static final String[] CREATE_TABLES = {CREATE_USERS_TABLE, CREATE_RECORDS_TABLE};
 }
