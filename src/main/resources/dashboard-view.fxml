@@ -75,7 +75,7 @@
                               <TextField fx:id="profileLastNameField" promptText="Last name" />
                            </children>
                         </VBox>
-                        <Button fx:id="saveProfileButton" mnemonicParsing="false" style="-fx-background-color: #0074E7; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6px; -fx-border-radius: 6px;" text="Save Profile" />
+                        <Button fx:id="saveProfileButton" mnemonicParsing="false" onAction="#handleSaveProfile" style="-fx-background-color: #0074E7; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6px; -fx-border-radius: 6px;" text="Save Profile" />
                      </children>
                   </HBox>
                   <Label fx:id="profileMessageLabel" style="-fx-text-fill: #486581; -fx-font-size: 12px;" text="" wrapText="true" />
