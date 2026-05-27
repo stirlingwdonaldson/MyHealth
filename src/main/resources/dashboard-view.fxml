@@ -9,7 +9,6 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -47,7 +46,7 @@
              <Button cache="true" cacheHint="QUALITY" centerShape="false" depthTest="ENABLE" graphicTextGap="5.0" layoutX="18.0" layoutY="18.0" mnemonicParsing="false" style="-fx-max-width: INFINITY; -fx-background-color: transparent; -fx-background-radius: 5; -fx-border-radius: 5; -fx-alignment: center-left; -fx-cursor: hand;" text="Health Records" />
              <Button cache="true" cacheHint="QUALITY" centerShape="false" depthTest="ENABLE" graphicTextGap="5.0" layoutX="18.0" layoutY="52.0" mnemonicParsing="false" style="-fx-max-width: INFINITY; -fx-background-color: transparent; -fx-background-radius: 5; -fx-border-radius: 5; -fx-alignment: center-left; -fx-cursor: hand;" text="Add Record" />
             <Region prefWidth="200.0" VBox.vgrow="ALWAYS" />
-             <Button cache="true" cacheHint="QUALITY" centerShape="false" depthTest="ENABLE" graphicTextGap="5.0" layoutX="18.0" layoutY="86.0" mnemonicParsing="false" style="-fx-max-width: INFINITY; -fx-background-color: transparent; -fx-background-radius: 5; -fx-border-radius: 5; -fx-alignment: center-left; -fx-cursor: hand;" text="Profile" />
+             <Button cache="true" cacheHint="QUALITY" centerShape="false" depthTest="ENABLE" graphicTextGap="5.0" layoutX="18.0" layoutY="86.0" mnemonicParsing="false" onAction="#handleShowProfile" style="-fx-max-width: INFINITY; -fx-background-color: transparent; -fx-background-radius: 5; -fx-border-radius: 5; -fx-alignment: center-left; -fx-cursor: hand;" text="Profile" />
          </children>
       </VBox>
    </left>
@@ -58,29 +57,6 @@
       <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #F9FAFB; -fx-padding: 10;" BorderPane.alignment="CENTER">
          <children>
             <Label fx:id="welcomeLabel" />
-            <VBox maxWidth="1.7976931348623157E308" style="-fx-background-color: #FFFFFF; -fx-border-color: #E5E7EB; -fx-background-radius: 10; -fx-border-radius: 10; -fx-padding: 14; -fx-spacing: 10;">
-               <children>
-                  <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Profile" />
-                  <HBox alignment="CENTER_LEFT" style="-fx-spacing: 10;">
-                     <children>
-                        <VBox HBox.hgrow="ALWAYS">
-                           <children>
-                              <Label text="First Name" />
-                              <TextField fx:id="profileFirstNameField" promptText="First name" />
-                           </children>
-                        </VBox>
-                        <VBox HBox.hgrow="ALWAYS">
-                           <children>
-                              <Label text="Last Name" />
-                              <TextField fx:id="profileLastNameField" promptText="Last name" />
-                           </children>
-                        </VBox>
-                        <Button fx:id="saveProfileButton" mnemonicParsing="false" onAction="#handleSaveProfile" style="-fx-background-color: #0074E7; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6px; -fx-border-radius: 6px;" text="Save Profile" />
-                     </children>
-                  </HBox>
-                  <Label fx:id="profileMessageLabel" style="-fx-text-fill: #486581; -fx-font-size: 12px;" text="" wrapText="true" />
-               </children>
-            </VBox>
             <HBox alignment="CENTER" prefHeight="110.0" prefWidth="200.0" style="-fx-padding: 10; -fx-spacing: 10;">
                <children>
                   <VBox maxWidth="350.0" prefHeight="200.0" prefWidth="300.0" style="-fx-background-color: #F3F4F6; -fx-border-color: #E5E7EB; -fx-background-radius: 10; -fx-border-radius: 10; -fx-padding: 10;" HBox.hgrow="ALWAYS">
