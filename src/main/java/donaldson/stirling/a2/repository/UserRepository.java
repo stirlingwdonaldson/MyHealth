@@ -87,6 +87,17 @@ public class UserRepository {
     return user;
   }
 
+  public boolean updateProfile(int userId, String firstName, String lastName) throws SQLException {
+    String sql = "UPDATE users SET first_name = ?, last_name = ? WHERE id = ?";
+
+    try (PreparedStatement statement = connection.prepareStatement(sql)) {
+      statement.setString(1, firstName);
+      statement.setString(2, lastName);
+      statement.setInt(3, userId);
+      return statement.executeUpdate() == 1;
+    }
+  }
+
   private User mapUser(ResultSet resultSet) throws SQLException {
     return new User(
         resultSet.getInt("id"),
