@@ -1,4 +1,3 @@
-
 package donaldson.stirling.a2.controller;
 
 import donaldson.stirling.a2.app.AppContext;

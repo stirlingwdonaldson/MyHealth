@@ -1,7 +1,6 @@
-
 package donaldson.stirling.a2.repository;
 
-import java.util.List;
+import donaldson.stirling.a2.model.Record;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,8 +8,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.time.LocalDate;
 import java.util.ArrayList;
-
-import donaldson.stirling.a2.model.Record;
+import java.util.List;
 
 public class RecordRepository {
   private final Connection connection;
@@ -22,12 +20,14 @@ public class RecordRepository {
   public Record createRecord(Record record) throws SQLException {
     record.validate();
 
-    String sql = """
+    String sql =
+        """
         INSERT INTO records (user_id, weight, temperature, blood_pressure, note, date)
         VALUES (?, ?, ?, ?, ?, ?)
         """;
 
-    try (PreparedStatement statement = connection.prepareStatement(sql, java.sql.Statement.RETURN_GENERATED_KEYS)) {
+    try (PreparedStatement statement =
+        connection.prepareStatement(sql, java.sql.Statement.RETURN_GENERATED_KEYS)) {
       setRecordFields(statement, record);
       statement.executeUpdate();
 
@@ -49,7 +49,8 @@ public class RecordRepository {
   }
 
   public List<Record> findAllByUserId(int userId) throws SQLException {
-    String sql = """
+    String sql =
+        """
         SELECT id, user_id, weight, temperature, blood_pressure, note, date
         FROM records
         WHERE user_id = ?
@@ -72,7 +73,8 @@ public class RecordRepository {
   }
 
   public Record findByIdForUser(int recordId, int userId) throws SQLException {
-    String sql = """
+    String sql =
+        """
         SELECT id, user_id, weight, temperature, blood_pressure, note, date
         FROM records
         WHERE id = ? AND user_id = ?
@@ -90,8 +92,6 @@ public class RecordRepository {
       }
     }
   }
-
-
 
   public boolean updateRecord(Record record) throws SQLException {
     record.validate();
@@ -114,8 +114,6 @@ public class RecordRepository {
       return statement.executeUpdate() == 1;
     }
   }
-
-
 
   public boolean deleteRecord(int recordId, int userId) throws SQLException {
     String sql = "DELETE FROM records WHERE id = ? AND user_id = ?";
@@ -164,5 +162,4 @@ public class RecordRepository {
     }
     return value;
   }
-
 }

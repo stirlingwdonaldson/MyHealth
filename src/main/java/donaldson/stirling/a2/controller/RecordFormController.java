@@ -1,4 +1,3 @@
-
 package donaldson.stirling.a2.controller;
 
 import donaldson.stirling.a2.app.AppContext;
@@ -154,12 +153,12 @@ public class RecordFormController {
 
   private Parent loadView() {
     try {
-      URL resource = getClass().getResource("/record-form-view.fxml");
+      URL resource = getClass().getResource("/records-form-view.fxml");
       FXMLLoader loader = new FXMLLoader(resource);
       loader.setController(this);
       return loader.load();
     } catch (IOException exception) {
-      throw new IllegalStateException("Failed to load record-form-view.fxml", exception);
+      throw new IllegalStateException("Failed to load records-form-view.fxml", exception);
     }
   }
 }
