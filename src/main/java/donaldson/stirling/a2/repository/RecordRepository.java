@@ -91,6 +91,30 @@ public class RecordRepository {
     }
   }
 
+
+
+  public boolean updateRecord(Record record) throws SQLException {
+    record.validate();
+
+    String sql =
+        """
+        UPDATE records
+        SET weight = ?, temperature = ?, blood_pressure = ?, note = ?, date = ?
+        WHERE id = ? AND user_id = ?
+        """;
+
+    try (PreparedStatement statement = connection.prepareStatement(sql)) {
+      setNullableDouble(statement, 1, record.getWeight());
+      setNullableDouble(statement, 2, record.getTemperature());
+      statement.setString(3, record.getBloodPressure());
+      statement.setString(4, record.getNote());
+      statement.setString(5, record.getDate().toString());
+      statement.setInt(6, record.getId());
+      statement.setInt(7, record.getUserId());
+      return statement.executeUpdate() == 1;
+    }
+  }
+
   private void setRecordFields(PreparedStatement statement, Record record) throws SQLException {
     statement.setInt(1, record.getUserId());
     setNullableDouble(statement, 2, record.getWeight());
