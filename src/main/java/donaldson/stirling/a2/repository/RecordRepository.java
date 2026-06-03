@@ -71,6 +71,26 @@ public class RecordRepository {
     return records;
   }
 
+  public Record findByIdForUser(int recordId, int userId) throws SQLException {
+    String sql = """
+        SELECT id, user_id, weight, temperature, blood_pressure, note, date
+        FROM records
+        WHERE id = ? AND user_id = ?
+        """;
+
+    try (PreparedStatement statement = connection.prepareStatement(sql)) {
+      statement.setInt(1, recordId);
+      statement.setInt(2, userId);
+
+      try (ResultSet resultSet = statement.executeQuery()) {
+        if (!resultSet.next()) {
+          return null;
+        }
+        return mapRecord(resultSet);
+      }
+    }
+  }
+
   private void setRecordFields(PreparedStatement statement, Record record) throws SQLException {
     statement.setInt(1, record.getUserId());
     setNullableDouble(statement, 2, record.getWeight());
