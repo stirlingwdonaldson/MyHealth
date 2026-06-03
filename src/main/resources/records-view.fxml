@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="40.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #E5E7EB; -fx-padding: 8 20 8 20; -fx-spacing: 8; -fx-max-width: INFINITY;" BorderPane.alignment="CENTER_LEFT">
          <children>
@@ -40,7 +40,7 @@
             <Insets />
          </opaqueInsets>
          <children>
-            <Button cache="true" centerShape="false" depthTest="ENABLE" graphicTextGap="5.0" mnemonicParsing="false" onAction="#handleShowDashboard" style="-fx-max-width: INFINITY; -fx-background-color: transparent; -fx-background-radius: 5; -fx-border-radius: 5; -fx-alignment: center-left; -fx-cursor: hand;" text="Dashboard" VBox.vgrow="ALWAYS" />
+            <Button cache="true" centerShape="false" depthTest="ENABLE" graphicTextGap="5.0" mnemonicParsing="false" onAction="#handleShowDashboard" style="-fx-max-width: INFINITY; -fx-background-color: transparent; -fx-background-radius: 5; -fx-border-radius: 5; -fx-text-alignment: center-left; -fx-alignment: center-left; -fx-cursor: hand;" text="Dashboard" VBox.vgrow="ALWAYS" />
             <Button cache="true" cacheHint="QUALITY" centerShape="false" depthTest="ENABLE" graphicTextGap="5.0" mnemonicParsing="false" style="-fx-max-width: INFINITY; -fx-background-color: #E0F2FE; -fx-background-radius: 5; -fx-border-radius: 5; -fx-alignment: center-left; -fx-cursor: hand; -fx-font-weight: bold;" text="Health Records" />
             <Button cache="true" cacheHint="QUALITY" centerShape="false" depthTest="ENABLE" graphicTextGap="5.0" mnemonicParsing="false" onAction="#handleShowRecordForm" style="-fx-max-width: INFINITY; -fx-background-color: transparent; -fx-background-radius: 5; -fx-border-radius: 5; -fx-alignment: center-left; -fx-cursor: hand;" text="Add Record" />
             <Region prefWidth="200.0" VBox.vgrow="ALWAYS" />
@@ -63,6 +63,8 @@
                      </children>
                   </VBox>
                   <Button mnemonicParsing="false" onAction="#handleShowRecordForm" style="-fx-background-color: #0074E7; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6px; -fx-border-radius: 6px;" text="Add Record" />
+                  <Button mnemonicParsing="false" onAction="#handleEditRecord" style="-fx-background-color: #FFFFFF; -fx-text-fill: #18181b; -fx-font-weight: bold; -fx-background-radius: 6px; -fx-border-radius: 6px; -fx-border-color: #CBD5E1;" text="Edit Selected" />
+                  <Button mnemonicParsing="false" onAction="#handleDeleteRecord" style="-fx-background-color: #FFFFFF; -fx-text-fill: #c81e1e; -fx-font-weight: bold; -fx-background-radius: 6px; -fx-border-radius: 6px; -fx-border-color: #FCA5A5;" text="Delete Selected" />
                   <Button mnemonicParsing="false" onAction="#handleRefreshRecords" style="-fx-background-color: #FFFFFF; -fx-text-fill: #18181b; -fx-font-weight: bold; -fx-background-radius: 6px; -fx-border-radius: 6px; -fx-border-color: #CBD5E1;" text="Refresh" />
                </children>
             </HBox>

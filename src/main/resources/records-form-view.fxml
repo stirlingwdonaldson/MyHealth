@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="40.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #E5E7EB; -fx-padding: 8 20 8 20; -fx-spacing: 8; -fx-max-width: INFINITY;" BorderPane.alignment="CENTER_LEFT">
          <children>
@@ -40,7 +40,7 @@
             <Insets />
          </opaqueInsets>
          <children>
-            <Button cache="true" centerShape="false" depthTest="ENABLE" graphicTextGap="5.0" mnemonicParsing="false" onAction="#handleShowDashboard" style="-fx-max-width: INFINITY; -fx-background-color: transparent; -fx-background-radius: 5; -fx-border-radius: 5; -fx-alignment: center-left; -fx-cursor: hand;" text="Dashboard" VBox.vgrow="ALWAYS" />
+            <Button cache="true" centerShape="false" depthTest="ENABLE" graphicTextGap="5.0" mnemonicParsing="false" onAction="#handleShowDashboard" style="-fx-max-width: INFINITY; -fx-background-color: transparent; -fx-background-radius: 5; -fx-border-radius: 5; -fx-text-alignment: center-left; -fx-alignment: center-left; -fx-cursor: hand;" text="Dashboard" VBox.vgrow="ALWAYS" />
             <Button cache="true" cacheHint="QUALITY" centerShape="false" depthTest="ENABLE" graphicTextGap="5.0" mnemonicParsing="false" onAction="#handleShowRecords" style="-fx-max-width: INFINITY; -fx-background-color: transparent; -fx-background-radius: 5; -fx-border-radius: 5; -fx-alignment: center-left; -fx-cursor: hand;" text="Health Records" />
             <Button cache="true" cacheHint="QUALITY" centerShape="false" depthTest="ENABLE" graphicTextGap="5.0" mnemonicParsing="false" style="-fx-max-width: INFINITY; -fx-background-color: #E0F2FE; -fx-background-radius: 5; -fx-border-radius: 5; -fx-alignment: center-left; -fx-cursor: hand; -fx-font-weight: bold;" text="Add Record" />
             <Region prefWidth="200.0" VBox.vgrow="ALWAYS" />
@@ -54,7 +54,7 @@
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #F9FAFB; -fx-padding: 24; -fx-spacing: 14;" BorderPane.alignment="CENTER">
          <children>
-            <Label style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Add Health Record" />
+            <Label fx:id="formTitleLabel" style="-fx-font-size: 24px; -fx-font-weight: bold;" text="Add Health Record" />
             <Label text="Enter any health details you want to save. At least one field is required." textFill="#486581" />
             <VBox maxWidth="620.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #E5E7EB; -fx-background-radius: 10; -fx-border-radius: 10; -fx-padding: 18; -fx-spacing: 12;">
                <children>
@@ -84,7 +84,7 @@
                   </VBox>
                   <HBox style="-fx-spacing: 10;">
                      <children>
-                        <Button defaultButton="true" mnemonicParsing="false" onAction="#handleSaveRecord" style="-fx-background-color: #0074E7; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6px; -fx-border-radius: 6px;" text="Save Record" />
+                        <Button fx:id="saveRecordButton" defaultButton="true" mnemonicParsing="false" onAction="#handleSaveRecord" style="-fx-background-color: #0074E7; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6px; -fx-border-radius: 6px;" text="Save Record" />
                         <Button mnemonicParsing="false" onAction="#handleClearForm" style="-fx-background-color: #FFFFFF; -fx-text-fill: #18181b; -fx-font-weight: bold; -fx-background-radius: 6px; -fx-border-radius: 6px; -fx-border-color: #CBD5E1;" text="Clear" />
                         <Button mnemonicParsing="false" onAction="#handleShowRecords" style="-fx-background-color: #FFFFFF; -fx-text-fill: #18181b; -fx-font-weight: bold; -fx-background-radius: 6px; -fx-border-radius: 6px; -fx-border-color: #CBD5E1;" text="Cancel" />
                      </children>
