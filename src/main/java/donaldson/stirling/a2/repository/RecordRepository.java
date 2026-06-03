@@ -115,6 +115,18 @@ public class RecordRepository {
     }
   }
 
+
+
+  public boolean deleteRecord(int recordId, int userId) throws SQLException {
+    String sql = "DELETE FROM records WHERE id = ? AND user_id = ?";
+
+    try (PreparedStatement statement = connection.prepareStatement(sql)) {
+      statement.setInt(1, recordId);
+      statement.setInt(2, userId);
+      return statement.executeUpdate() == 1;
+    }
+  }
+
   private void setRecordFields(PreparedStatement statement, Record record) throws SQLException {
     statement.setInt(1, record.getUserId());
     setNullableDouble(statement, 2, record.getWeight());
