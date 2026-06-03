@@ -1,3 +1,4 @@
+
 package donaldson.stirling.a2.controller;
 
 import donaldson.stirling.a2.app.AppContext;
@@ -11,6 +12,7 @@ import java.sql.SQLException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -18,10 +20,13 @@ import javafx.scene.control.TextField;
 public class RecordFormController {
   private final AppContext appContext;
   private final SceneManager sceneManager;
+  private final Record editingRecord;
 
   @FXML private Label fullNameLabel;
 
   @FXML private Label usernameLabel;
+
+  @FXML private Label formTitleLabel;
 
   @FXML private TextField weightField;
 
@@ -31,11 +36,19 @@ public class RecordFormController {
 
   @FXML private TextArea noteField;
 
+  @FXML private Button saveRecordButton;
+
   @FXML private Label recordMessageLabel;
 
   public RecordFormController(AppContext appContext, SceneManager sceneManager) {
+    this(appContext, sceneManager, null);
+  }
+
+  public RecordFormController(
+      AppContext appContext, SceneManager sceneManager, Record editingRecord) {
     this.appContext = appContext;
     this.sceneManager = sceneManager;
+    this.editingRecord = editingRecord;
   }
 
   public void show() {
@@ -43,7 +56,7 @@ public class RecordFormController {
       new LoginController(appContext, sceneManager).show();
       return;
     }
-    sceneManager.show("MyHealth | Add Record", loadView());
+    sceneManager.show(isEditing() ? "MyHealth | Edit Record" : "MyHealth | Add Record", loadView());
   }
 
   @FXML
@@ -51,6 +64,12 @@ public class RecordFormController {
     User user = appContext.getCurrentUser();
     fullNameLabel.setText(user.getFullName());
     usernameLabel.setText(user.getUsername());
+
+    if (isEditing()) {
+      formTitleLabel.setText("Edit Health Record");
+      saveRecordButton.setText("Save Changes");
+      populateForm(editingRecord);
+    }
   }
 
   @FXML
@@ -70,8 +89,7 @@ public class RecordFormController {
     String bloodPressure = cleanText(bloodPressureField.getText());
     String note = cleanText(noteField.getText());
 
-    Record record =
-        new Record(appContext.getCurrentUser().getId(), weight, temperature, bloodPressure, note);
+    Record record = buildRecord(weight, temperature, bloodPressure, note);
     String validationMessage = record.getValidationMessage();
     if (validationMessage != null) {
       showMessage(validationMessage, true);
@@ -81,7 +99,14 @@ public class RecordFormController {
     RecordRepository recordRepository = new RecordRepository(appContext.getConnection());
 
     try {
-      recordRepository.createRecord(record);
+      if (isEditing()) {
+        if (!recordRepository.updateRecord(record)) {
+          showMessage("Unable to update health record. Please try again.", true);
+          return;
+        }
+      } else {
+        recordRepository.createRecord(record);
+      }
       new RecordsController(appContext, sceneManager).show();
     } catch (SQLException exception) {
       showMessage("Unable to save health record. Please try again.", true);
@@ -132,6 +157,34 @@ public class RecordFormController {
     }
   }
 
+  private Record buildRecord(Double weight, Double temperature, String bloodPressure, String note) {
+    if (!isEditing()) {
+      return new Record(
+          appContext.getCurrentUser().getId(), weight, temperature, bloodPressure, note);
+    }
+
+    return new Record(
+        editingRecord.getId(),
+        editingRecord.getUserId(),
+        weight,
+        temperature,
+        bloodPressure,
+        note,
+        editingRecord.getDate());
+  }
+
+  private void populateForm(Record record) {
+    weightField.setText(record.getWeight() == null ? "" : record.getWeight().toString());
+    temperatureField.setText(
+        record.getTemperature() == null ? "" : record.getTemperature().toString());
+    bloodPressureField.setText(record.getBloodPressure() == null ? "" : record.getBloodPressure());
+    noteField.setText(record.getNote() == null ? "" : record.getNote());
+  }
+
+  private boolean isEditing() {
+    return editingRecord != null;
+  }
+
   private boolean hasError() {
     return recordMessageLabel.getText() != null && !recordMessageLabel.getText().isBlank();
   }
@@ -153,12 +206,12 @@ public class RecordFormController {
 
   private Parent loadView() {
     try {
-      URL resource = getClass().getResource("/records-form-view.fxml");
+      URL resource = getClass().getResource("/record-form-view.fxml");
       FXMLLoader loader = new FXMLLoader(resource);
       loader.setController(this);
       return loader.load();
     } catch (IOException exception) {
-      throw new IllegalStateException("Failed to load records-form-view.fxml", exception);
+      throw new IllegalStateException("Failed to load record-form-view.fxml", exception);
     }
   }
 }
