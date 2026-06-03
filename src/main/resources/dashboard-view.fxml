@@ -43,7 +43,7 @@
          </opaqueInsets>
          <children>
              <Button cache="true" centerShape="false" depthTest="ENABLE" graphicTextGap="5.0" mnemonicParsing="false" style="-fx-max-width: INFINITy; -fx-background-color: transparent; -fx-background-radius: 5; -fx-border-radius: 5; -fx-text-alignment: center-left; -fx-alignment: center-left; -fx-cursor: hand;" text="Dashboard" VBox.vgrow="ALWAYS" />
-             <Button cache="true" cacheHint="QUALITY" centerShape="false" depthTest="ENABLE" graphicTextGap="5.0" layoutX="18.0" layoutY="18.0" mnemonicParsing="false" style="-fx-max-width: INFINITY; -fx-background-color: transparent; -fx-background-radius: 5; -fx-border-radius: 5; -fx-alignment: center-left; -fx-cursor: hand;" text="Health Records" />
+              <Button cache="true" cacheHint="QUALITY" centerShape="false" depthTest="ENABLE" graphicTextGap="5.0" layoutX="18.0" layoutY="18.0" mnemonicParsing="false" onAction="#handleShowRecords" style="-fx-max-width: INFINITY; -fx-background-color: transparent; -fx-background-radius: 5; -fx-border-radius: 5; -fx-alignment: center-left; -fx-cursor: hand;" text="Health Records" />
              <Button cache="true" cacheHint="QUALITY" centerShape="false" depthTest="ENABLE" graphicTextGap="5.0" layoutX="18.0" layoutY="52.0" mnemonicParsing="false" style="-fx-max-width: INFINITY; -fx-background-color: transparent; -fx-background-radius: 5; -fx-border-radius: 5; -fx-alignment: center-left; -fx-cursor: hand;" text="Add Record" />
             <Region prefWidth="200.0" VBox.vgrow="ALWAYS" />
              <Button cache="true" cacheHint="QUALITY" centerShape="false" depthTest="ENABLE" graphicTextGap="5.0" layoutX="18.0" layoutY="86.0" mnemonicParsing="false" onAction="#handleShowProfile" style="-fx-max-width: INFINITY; -fx-background-color: transparent; -fx-background-radius: 5; -fx-border-radius: 5; -fx-alignment: center-left; -fx-cursor: hand;" text="Profile" />
@@ -139,3 +139,4 @@
       </VBox>
    </center>
 </BorderPane>
+
