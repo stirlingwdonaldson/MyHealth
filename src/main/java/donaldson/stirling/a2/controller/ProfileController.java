@@ -86,6 +86,11 @@ public class ProfileController {
   }
 
   @FXML
+  private void handleShowRecordForm() {
+    new RecordFormController(appContext, sceneManager).show();
+  }
+
+  @FXML
   private void handleShowRecords() {
     new RecordsController(appContext, sceneManager).show();
   }
