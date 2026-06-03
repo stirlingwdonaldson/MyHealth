@@ -37,15 +37,24 @@ public class DashboardController {
   private void initialize() {
     User user = appContext.getCurrentUser();
 
-    welcomeLabel.setText("Welcome, " + user.getFullName());
-    fullNameLabel.setText(user.getFullName());
-    usernameLabel.setText(user.getUsername());
+    refreshUserDetails(user);
+  }
+
+  @FXML
+  private void handleShowProfile() {
+    new ProfileController(appContext, sceneManager).show();
   }
 
   @FXML
   private void handleLogout() {
-    appContext.setCurrentUser(null);
-    new LoginController(appContext, sceneManager).show();
+    appContext.setCurrentUser(null); // clear context of user
+    new LoginController(appContext, sceneManager).show(); // force logout action
+  }
+
+  private void refreshUserDetails(User user) {
+    welcomeLabel.setText("Welcome, " + user.getFullName());
+    fullNameLabel.setText(user.getFullName());
+    usernameLabel.setText(user.getUsername());
   }
 
   private Parent loadView() {
