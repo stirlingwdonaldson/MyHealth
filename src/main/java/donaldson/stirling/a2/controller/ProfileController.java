@@ -1,3 +1,4 @@
+
 package donaldson.stirling.a2.controller;
 
 import donaldson.stirling.a2.app.AppContext;
@@ -82,6 +83,11 @@ public class ProfileController {
     } catch (SQLException exception) {
       showProfileMessage("Unable to update profile. Please try again.", true);
     }
+  }
+
+  @FXML
+  private void handleShowRecords() {
+    new RecordsController(appContext, sceneManager).show();
   }
 
   @FXML
