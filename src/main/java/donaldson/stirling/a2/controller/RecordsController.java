@@ -1,3 +1,4 @@
+
 package donaldson.stirling.a2.controller;
 
 import donaldson.stirling.a2.app.AppContext;
@@ -66,6 +67,11 @@ public class RecordsController {
   @FXML
   private void handleRefreshRecords() {
     loadRecords();
+  }
+
+  @FXML
+  private void handleShowRecordForm() {
+    new RecordFormController(appContext, sceneManager).show();
   }
 
   @FXML
@@ -149,4 +155,3 @@ public class RecordsController {
     }
   }
 }
-
