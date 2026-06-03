@@ -41,6 +41,11 @@ public class DashboardController {
   }
 
   @FXML
+  private void handleShowRecords() {
+    new RecordsController(appContext, sceneManager).show();
+  }
+
+  @FXML
   private void handleShowProfile() {
     new ProfileController(appContext, sceneManager).show();
   }
@@ -68,3 +73,4 @@ public class DashboardController {
     }
   }
 }
+
