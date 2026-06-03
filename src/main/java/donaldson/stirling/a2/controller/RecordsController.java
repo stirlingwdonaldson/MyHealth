@@ -1,3 +1,4 @@
+
 package donaldson.stirling.a2.controller;
 
 import donaldson.stirling.a2.app.AppContext;
@@ -14,6 +15,8 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -71,6 +74,54 @@ public class RecordsController {
   @FXML
   private void handleShowRecordForm() {
     new RecordFormController(appContext, sceneManager).show();
+  }
+
+  @FXML
+  private void handleEditRecord() {
+    Record selectedRecord = recordsTable.getSelectionModel().getSelectedItem();
+    if (selectedRecord == null) {
+      showMessage("Select a health record to edit.", true);
+      return;
+    }
+
+    new RecordFormController(appContext, sceneManager, selectedRecord).show();
+  }
+
+  @FXML
+  private void handleDeleteRecord() {
+    Record selectedRecord = recordsTable.getSelectionModel().getSelectedItem();
+    if (selectedRecord == null) {
+      showMessage("Select a health record to delete.", true);
+      return;
+    }
+
+    Alert confirmation =
+        new Alert(
+            Alert.AlertType.CONFIRMATION,
+            "Delete the selected health record?",
+            ButtonType.CANCEL,
+            ButtonType.OK);
+    confirmation.setTitle("Delete Health Record");
+    confirmation.setHeaderText("This action cannot be undone.");
+
+    if (confirmation.showAndWait().orElse(ButtonType.CANCEL) != ButtonType.OK) {
+      return;
+    }
+
+    RecordRepository recordRepository = new RecordRepository(appContext.getConnection());
+
+    try {
+      if (!recordRepository.deleteRecord(
+          selectedRecord.getId(), appContext.getCurrentUser().getId())) {
+        showMessage("Unable to delete the selected health record.", true);
+        return;
+      }
+
+      loadRecords();
+      showMessage("Health record deleted.", false);
+    } catch (SQLException exception) {
+      showMessage("Unable to delete health record. Please try again.", true);
+    }
   }
 
   @FXML
