@@ -1,3 +1,4 @@
+
 package donaldson.stirling.a2.controller;
 
 import donaldson.stirling.a2.app.AppContext;
@@ -5,8 +6,11 @@ import donaldson.stirling.a2.app.SceneManager;
 import donaldson.stirling.a2.model.Record;
 import donaldson.stirling.a2.model.User;
 import donaldson.stirling.a2.repository.RecordRepository;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.sql.SQLException;
 import java.util.List;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -19,6 +23,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.stage.FileChooser;
 
 public class RecordsController {
   private final AppContext appContext;
@@ -124,6 +129,34 @@ public class RecordsController {
   }
 
   @FXML
+  private void handleExportRecords() {
+    RecordRepository recordRepository = new RecordRepository(appContext.getConnection());
+
+    try {
+      List<Record> records = recordRepository.findAllByUserId(appContext.getCurrentUser().getId());
+      if (records.isEmpty()) {
+        showMessage("There are no health records to export.", true);
+        return;
+      }
+
+      FileChooser fileChooser = new FileChooser();
+      fileChooser.setTitle("Export Health Records");
+      fileChooser.setInitialFileName("myhealth-records.txt");
+      fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text Files", "*.txt"));
+
+      File selectedFile = fileChooser.showSaveDialog(recordsTable.getScene().getWindow());
+      if (selectedFile == null) {
+        return;
+      }
+
+      Files.writeString(selectedFile.toPath(), buildExportText(records), StandardCharsets.UTF_8);
+      showMessage("Health records exported to " + selectedFile.getName() + ".", false);
+    } catch (SQLException | IOException exception) {
+      showMessage("Unable to export health records. Please try again.", true);
+    }
+  }
+
+  @FXML
   private void handleShowDashboard() {
     new DashboardController(appContext, sceneManager).show();
   }
@@ -183,6 +216,33 @@ public class RecordsController {
       return "";
     }
     return value;
+  }
+
+  private String buildExportText(List<Record> records) {
+    User user = appContext.getCurrentUser();
+    StringBuilder builder = new StringBuilder();
+    builder.append("MyHealth Records").append(System.lineSeparator());
+    builder
+        .append("User: ")
+        .append(user.getFullName())
+        .append(" (")
+        .append(user.getUsername())
+        .append(")");
+    builder.append(System.lineSeparator()).append(System.lineSeparator());
+
+    for (Record record : records) {
+      builder.append("Date: ").append(record.getDate()).append(System.lineSeparator());
+      builder.append("Weight: ").append(formatText(formatDouble(record.getWeight())));
+      builder.append(System.lineSeparator());
+      builder.append("Temperature: ").append(formatText(formatDouble(record.getTemperature())));
+      builder.append(System.lineSeparator());
+      builder.append("Blood Pressure: ").append(formatText(record.getBloodPressure()));
+      builder.append(System.lineSeparator());
+      builder.append("Note: ").append(formatText(record.getNote()));
+      builder.append(System.lineSeparator()).append(System.lineSeparator());
+    }
+
+    return builder.toString();
   }
 
   private void showMessage(String message, boolean isError) {

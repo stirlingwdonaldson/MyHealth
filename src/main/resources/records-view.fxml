@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
@@ -64,6 +65,7 @@
                   <Button mnemonicParsing="false" onAction="#handleShowRecordForm" style="-fx-background-color: #0074E7; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6px; -fx-border-radius: 6px;" text="Add Record" />
                   <Button mnemonicParsing="false" onAction="#handleEditRecord" style="-fx-background-color: #FFFFFF; -fx-text-fill: #18181b; -fx-font-weight: bold; -fx-background-radius: 6px; -fx-border-radius: 6px; -fx-border-color: #CBD5E1;" text="Edit Selected" />
                   <Button mnemonicParsing="false" onAction="#handleDeleteRecord" style="-fx-background-color: #FFFFFF; -fx-text-fill: #c81e1e; -fx-font-weight: bold; -fx-background-radius: 6px; -fx-border-radius: 6px; -fx-border-color: #FCA5A5;" text="Delete Selected" />
+                  <Button mnemonicParsing="false" onAction="#handleExportRecords" style="-fx-background-color: #FFFFFF; -fx-text-fill: #18181b; -fx-font-weight: bold; -fx-background-radius: 6px; -fx-border-radius: 6px; -fx-border-color: #CBD5E1;" text="Export Records" />
                   <Button mnemonicParsing="false" onAction="#handleRefreshRecords" style="-fx-background-color: #FFFFFF; -fx-text-fill: #18181b; -fx-font-weight: bold; -fx-background-radius: 6px; -fx-border-radius: 6px; -fx-border-color: #CBD5E1;" text="Refresh" />
                </children>
             </HBox>
