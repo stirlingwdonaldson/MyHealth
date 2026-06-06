@@ -5,18 +5,26 @@ COSC2391 Further Programming Assignment 2.
 
 ## Run Instructions
 
-Run from the root:
+Run on macOS/Linux from the repo root:
 
 ```bash
-./gradlew run
+export JAVAFX_HOME=/path/to/javafx-sdk-21
+./run.sh
 ```
 
-The application uses SQLite via JDBC. It initially creates `MyHealth.db` (if the file does not already exist)
+Run on Windows from the repo root:
 
-Run automated tests from the root:
+```bat
+set JAVAFX_HOME=C:\path\to\javafx-sdk-21
+run.bat
+```
+
+The application creates `MyHealth.db` automatically if the file does not already exist.
+
+Run automated tests from the root with the JUnit console jar. Either place `junit-platform-console-standalone.jar` in `lib/`, or set `JUNIT_CONSOLE_JAR` to the jar path.
 
 ```bash
-./gradlew test
+./test.sh
 ```
 
 ## Assignment Checklist
@@ -36,4 +44,4 @@ Run automated tests from the root:
 // Y Password hashing/encryption implemented: SHA-256 hashing
 // Y JUnit test cases included
 // Y Design pattern implemented in addition to MVC: Repository/DAO
-// Y Database setup/run instructions: Run `./gradlew run`; `MyHealth.db` is created automatically.
+// Y Database setup/run instructions: Run `./run.sh` or `run.bat`; `MyHealth.db` is created automatically.

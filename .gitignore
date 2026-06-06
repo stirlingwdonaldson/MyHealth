@@ -1,27 +1,9 @@
-# Ignore Gradle project-specific cache directory
-.gradle
-
-# Ignore Gradle build output directory
-build
-
-# Ignore Kotlin plugin data
-.kotlin
-
-# Ignore Gradle GUI config
-gradle-app.setting
-
-# Avoid ignoring the Gradle Wrapper JAR (recommended to keep in VCS)
-!gradle-wrapper.jar
-
-# Cache of project
-.gradletasknamecache
-
 # Java specific
 *.class
-*.jar
 *.war
 *.ear
 hs_err_pid*
+out/
 
 # IDE specific (optional but recommended)
 .idea/
