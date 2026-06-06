@@ -32,7 +32,7 @@ Run automated tests from the root:
 // Y Data is stored and restored using JDBC with SQLite
 // Y User can view all health records
 // Y User can export records to a text file
-// N User password update implemented
+// Y User password update implemented
 // Y Password hashing/encryption implemented: SHA-256 hashing
 // Y JUnit test cases included
 // Y Design pattern implemented in addition to MVC: Repository/DAO

@@ -98,6 +98,16 @@ public class UserRepository {
     }
   }
 
+  public boolean updatePassword(int userId, String rawPassword) throws SQLException {
+    String sql = "UPDATE users SET hashed_password = ? WHERE id = ?";
+
+    try (PreparedStatement statement = connection.prepareStatement(sql)) {
+      statement.setString(1, PasswordUtil.hash(rawPassword));
+      statement.setInt(2, userId);
+      return statement.executeUpdate() == 1;
+    }
+  }
+
   private User mapUser(ResultSet resultSet) throws SQLException {
     return new User(
         resultSet.getInt("id"),

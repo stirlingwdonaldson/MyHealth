@@ -68,6 +68,16 @@ class RepositoryTest {
   }
 
   @Test
+  void updatePasswordAcceptsNewPasswordAndRejectsOldPassword() throws SQLException {
+    User user = userRepository.createUser("stirling", "Health1!", "Stirling", "Donaldson");
+
+    assertTrue(userRepository.updatePassword(user.getId(), "Better2@"));
+
+    assertNull(userRepository.authenticate("stirling", "Health1!"));
+    assertNotNull(userRepository.authenticate("stirling", "Better2@"));
+  }
+
+  @Test
   void createRecordRejectsInvalidEmptyRecord() throws SQLException {
     User user = userRepository.createUser("stirling", "Health1!", "Stirling", "Donaldson");
     Record emptyRecord = new Record(user.getId(), null, null, null, null);

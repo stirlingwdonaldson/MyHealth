@@ -4,6 +4,7 @@ import donaldson.stirling.a2.app.AppContext;
 import donaldson.stirling.a2.app.SceneManager;
 import donaldson.stirling.a2.model.User;
 import donaldson.stirling.a2.repository.UserRepository;
+import donaldson.stirling.a2.util.PasswordUtil;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -11,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class ProfileController {
@@ -26,6 +28,14 @@ public class ProfileController {
   @FXML private TextField profileLastNameField;
 
   @FXML private Label profileMessageLabel;
+
+  @FXML private PasswordField currentPasswordField;
+
+  @FXML private PasswordField newPasswordField;
+
+  @FXML private PasswordField confirmPasswordField;
+
+  @FXML private Label passwordMessageLabel;
 
   public ProfileController(AppContext appContext, SceneManager sceneManager) {
     this.appContext = appContext;
@@ -85,6 +95,60 @@ public class ProfileController {
   }
 
   @FXML
+  private void handleChangePassword() {
+    User user = appContext.getCurrentUser();
+    String currentPassword =
+        currentPasswordField.getText() == null ? "" : currentPasswordField.getText().trim();
+    String newPassword = newPasswordField.getText() == null ? "" : newPasswordField.getText().trim();
+    String confirmPassword =
+        confirmPasswordField.getText() == null ? "" : confirmPasswordField.getText().trim();
+
+    if (currentPassword.isEmpty()) {
+      showPasswordMessage("Please enter your current password.", true);
+      return;
+    }
+
+    if (newPassword.isEmpty()) {
+      showPasswordMessage("Please enter a new password.", true);
+      return;
+    }
+
+    if (!newPassword.equals(confirmPassword)) {
+      showPasswordMessage("New password and confirmation must match.", true);
+      return;
+    }
+
+    if (!PasswordUtil.isValidPassword(newPassword)) {
+      showPasswordMessage(
+          "Password must be at least 8 characters and include letters, numbers, one uppercase letter, and one special character.",
+          true);
+      return;
+    }
+
+    UserRepository userRepository = new UserRepository(appContext.getConnection());
+
+    try {
+      if (userRepository.authenticate(user.getUsername(), currentPassword) == null) {
+        showPasswordMessage("Current password is incorrect.", true);
+        return;
+      }
+
+      if (!userRepository.updatePassword(user.getId(), newPassword)) {
+        showPasswordMessage("Unable to change password. Please try again.", true);
+        return;
+      }
+
+      user.setPassword(PasswordUtil.hash(newPassword));
+      currentPasswordField.clear();
+      newPasswordField.clear();
+      confirmPasswordField.clear();
+      showPasswordMessage("Password changed.", false);
+    } catch (SQLException exception) {
+      showPasswordMessage("Unable to change password. Please try again.", true);
+    }
+  }
+
+  @FXML
   private void handleShowRecordForm() {
     new RecordFormController(appContext, sceneManager).show();
   }
@@ -113,6 +177,14 @@ public class ProfileController {
   private void showProfileMessage(String message, boolean isError) {
     profileMessageLabel.setText(message);
     profileMessageLabel.setStyle(
+        isError
+            ? "-fx-text-fill: #c81e1e; -fx-font-size: 12px;"
+            : "-fx-text-fill: #0f766e; -fx-font-size: 12px;");
+  }
+
+  private void showPasswordMessage(String message, boolean isError) {
+    passwordMessageLabel.setText(message);
+    passwordMessageLabel.setStyle(
         isError
             ? "-fx-text-fill: #c81e1e; -fx-font-size: 12px;"
             : "-fx-text-fill: #0f766e; -fx-font-size: 12px;");
