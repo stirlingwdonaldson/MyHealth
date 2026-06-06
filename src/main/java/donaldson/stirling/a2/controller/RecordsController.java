@@ -12,6 +12,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.sql.SQLException;
 import java.util.List;
+import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -169,6 +170,11 @@ public class RecordsController {
   private void handleLogout() {
     appContext.setCurrentUser(null);
     new LoginController(appContext, sceneManager).show();
+  }
+
+  @FXML
+  private void handleExit() {
+    Platform.exit();
   }
 
   private void configureTable() {

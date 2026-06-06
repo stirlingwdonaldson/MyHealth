@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -72,6 +73,11 @@ public class DashboardController {
   private void handleLogout() {
     appContext.setCurrentUser(null); // clear context of user
     new LoginController(appContext, sceneManager).show(); // force logout action
+  }
+
+  @FXML
+  private void handleExit() {
+    Platform.exit();
   }
 
   private void refreshUserDetails(User user) {

@@ -8,6 +8,7 @@ import donaldson.stirling.a2.util.PasswordUtil;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -167,6 +168,11 @@ public class ProfileController {
   private void handleLogout() {
     appContext.setCurrentUser(null);
     new LoginController(appContext, sceneManager).show();
+  }
+
+  @FXML
+  private void handleExit() {
+    Platform.exit();
   }
 
   private void refreshUserDetails(User user) {

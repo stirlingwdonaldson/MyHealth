@@ -28,10 +28,11 @@
             <Region minHeight="0.0" minWidth="0.0" HBox.hgrow="ALWAYS" />
             <Label fx:id="fullNameLabel" text="Full Name" />
             <Separator orientation="VERTICAL" prefHeight="200.0" />
-            <Label fx:id="usernameLabel" text="username" />
-            <Button mnemonicParsing="false" onAction="#handleLogout" style="-fx-background-color: #fafafa; -fx-text-fill: #18181b; -fx-font-size: 10px; -fx-font-weight: 800; -fx-padding: 8px 16px; -fx-background-radius: 6px; -fx-border-radius: 6px; -fx-border-color: #18181b; -fx-border-width: 1px;" text="Log Out" />
-         </children>
-      </HBox>
+             <Label fx:id="usernameLabel" text="username" />
+             <Button mnemonicParsing="false" onAction="#handleLogout" style="-fx-background-color: #fafafa; -fx-text-fill: #18181b; -fx-font-size: 10px; -fx-font-weight: 800; -fx-padding: 8px 16px; -fx-background-radius: 6px; -fx-border-radius: 6px; -fx-border-color: #18181b; -fx-border-width: 1px;" text="Log Out" />
+             <Button mnemonicParsing="false" onAction="#handleExit" style="-fx-background-color: #18181b; -fx-text-fill: white; -fx-font-size: 10px; -fx-font-weight: 800; -fx-padding: 8px 16px; -fx-background-radius: 6px; -fx-border-radius: 6px;" text="Exit" />
+          </children>
+       </HBox>
    </top>
    <left>
       <VBox prefHeight="721.0" prefWidth="160.0" style="-fx-background-color: #F8FAFC; -fx-border-color: #E5E7EB; -fx-border-width: 0 1 0 0; -fx-padding: 8 8 4 8; -fx-spacing: 8;" BorderPane.alignment="CENTER">
