@@ -2,9 +2,13 @@ package donaldson.stirling.a2.controller;
 
 import donaldson.stirling.a2.app.AppContext;
 import donaldson.stirling.a2.app.SceneManager;
+import donaldson.stirling.a2.model.Record;
 import donaldson.stirling.a2.model.User;
+import donaldson.stirling.a2.repository.RecordRepository;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.List;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,6 +23,14 @@ public class DashboardController {
   @FXML private Label fullNameLabel;
 
   @FXML private Label usernameLabel;
+
+  @FXML private Label recordCountLabel;
+
+  @FXML private Label latestRecordLabel;
+
+  @FXML private Label profileStatusLabel;
+
+  @FXML private Label dashboardMessageLabel;
 
   public DashboardController(AppContext appContext, SceneManager sceneManager) {
     this.appContext = appContext;
@@ -38,6 +50,7 @@ public class DashboardController {
     User user = appContext.getCurrentUser();
 
     refreshUserDetails(user);
+    refreshRecordSummary(user);
   }
 
   @FXML
@@ -65,6 +78,30 @@ public class DashboardController {
     welcomeLabel.setText("Welcome, " + user.getFullName());
     fullNameLabel.setText(user.getFullName());
     usernameLabel.setText(user.getUsername());
+    profileStatusLabel.setText(user.getFullName());
+  }
+
+  private void refreshRecordSummary(User user) {
+    RecordRepository recordRepository = new RecordRepository(appContext.getConnection());
+
+    try {
+      List<Record> records = recordRepository.findAllByUserId(user.getId());
+      recordCountLabel.setText(String.valueOf(records.size()));
+
+      if (records.isEmpty()) {
+        latestRecordLabel.setText("No records yet");
+        dashboardMessageLabel.setText(
+            "Start by adding your first health record. You can enter any one or more fields.");
+        return;
+      }
+
+      latestRecordLabel.setText(records.get(0).getDate().toString());
+      dashboardMessageLabel.setText("Your records are saved and shown newest first.");
+    } catch (SQLException exception) {
+      recordCountLabel.setText("-");
+      latestRecordLabel.setText("Unavailable");
+      dashboardMessageLabel.setText("Unable to load dashboard summary. Please try again.");
+    }
   }
 
   private Parent loadView() {
