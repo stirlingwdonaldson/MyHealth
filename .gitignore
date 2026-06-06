@@ -31,3 +31,6 @@ hs_err_pid*
 .settings/
 bin/
 .DS_Store
+
+# Local application database created at runtime
+MyHealth.db

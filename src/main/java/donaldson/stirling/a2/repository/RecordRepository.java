@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Types;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class RecordRepository {
         """;
 
     try (PreparedStatement statement =
-        connection.prepareStatement(sql, java.sql.Statement.RETURN_GENERATED_KEYS)) {
+        connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
       setRecordFields(statement, record);
       statement.executeUpdate();
 

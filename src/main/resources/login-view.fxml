@@ -30,7 +30,7 @@
                </font>
             </Label>
              <PasswordField fx:id="passwordField" layoutX="41.0" layoutY="376.0" prefHeight="40.0" promptText="Enter password" style="-fx-background-radius: 8; -fx-border-radius: 8;" />
-              <Label fx:id="errorLabel" layoutX="41.0" layoutY="395.0" prefHeight="42.0" style="-fx-text-fill: #c81e1e; -fx-font-size: 12;" text="" visible="false" managed="false" wrapText="true" />
+             <Label fx:id="errorLabel" layoutX="41.0" layoutY="395.0" prefHeight="42.0" style="-fx-managed: false; -fx-text-fill: #c81e1e; -fx-font-size: 12;" text="" visible="false" wrapText="true" />
              <Button fx:id="loginButton" defaultButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleLogin" prefHeight="42.0" style="-fx-background-color: #0074E7; -fx-text-fill: white; -fx-font-weight: bold; -fx-border-radius: 12; -fx-background-radius: 12;" text="Log In" />
              <Button fx:id="signUpButton" layoutX="41.0" layoutY="458.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleShowSignup" prefHeight="42.0" style="-fx-border-color: #0074E7; -fx-background-color: white; -fx-text-fill: #0074E7; -fx-border-radius: 12; -fx-background-radius: 12;" text="Sign Up" />
          </children>
